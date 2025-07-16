@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: user
+      changes:
+        - createTable:
+            tableName: weather_request
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: city
+                  type: varchar(255)
+              - column:
+                  name: temperature
+                  type: double
+              - column:
+                  name: timestamp
+                  type: timestamp

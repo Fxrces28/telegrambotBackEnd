@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/weather_db
+    username: postgres
+    password: 123
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+
+openweathermap:
+  api-key: 9a3c66185b80f6a1e6e6c5f1b5c2b741
+server:
+  port: 8081
