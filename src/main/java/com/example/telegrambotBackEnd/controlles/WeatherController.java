@@ -27,7 +27,8 @@ public class WeatherController {
     @GetMapping("/{city}")
     public String getWeather(@PathVariable String city) throws Exception {
         OkHttpClient client = new OkHttpClient();
-        String url = String.format("http://api.openweathermap.org/data/2.5/weather?q=", city, apiKey);
+        String formattedCity = city.contains(",") ? city : city + ",ru";
+        String url = String.format("http://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s&units=metric&lang=ru", formattedCity, apiKey);
         okhttp3.Request request = new Request.Builder().url(url).build();
 
         try (Response response = client.newCall(request).execute()) {
