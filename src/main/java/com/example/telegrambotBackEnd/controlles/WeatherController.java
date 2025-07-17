@@ -2,6 +2,10 @@ package com.example.telegrambotBackEnd.controlles;
 
 import com.example.telegrambotBackEnd.entity.WeatherRequest;
 import com.example.telegrambotBackEnd.repository.WeatherRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,14 +19,23 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.time.LocalDateTime;
 
+
 @RestController
 @RequestMapping("api/weather")
 @RequiredArgsConstructor
+@Tag(name = "Weather API", description = "API для получения данных о погоде")
 public class WeatherController {
     private final WeatherRepository weatherRepository;
 
     @Value("${openweathermap.api-key}")
     private String apiKey;
+
+    @Operation(summary = "Получить погоду по городу", description = "Возвращает текущую погоду для указанного города")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Погода успешно получена"),
+            @ApiResponse(responseCode = "404", description = "Город не найден"),
+            @ApiResponse(responseCode = "500", description = "Ошибка сервера")
+    })
 
     @GetMapping("/{city}")
     public String getWeather(@PathVariable String city) throws Exception {
