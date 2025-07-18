@@ -1,4 +1,4 @@
-package com.example.telegrambotBackEnd.controlles;
+package com.example.telegrambotBackEnd.controllers;
 
 import com.example.telegrambotBackEnd.entity.WeatherRequest;
 import com.example.telegrambotBackEnd.repository.WeatherRepository;
@@ -46,7 +46,7 @@ public class WeatherController {
 
         try (Response response = client.newCall(request).execute()) {
             if (!response.isSuccessful()) {
-                return "Город не найден!";
+                return "Город не найден";
             }
 
             String jsonData = response.body().string();
